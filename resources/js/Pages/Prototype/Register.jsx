@@ -1,14 +1,14 @@
 import React from 'react';
-import TextInput from '@/Components/TextInput';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
-import { Head, Link } from '@inertiajs/react';
+import TextInput from "@/Components/TextInput";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import SecondaryButton from "@/Components/SecondaryButton";
+import { Head, Link } from "@inertiajs/react";
 
-export default function Login() {
+export default function Register() {
   return (
       <>
-          <Head title="Sign In" />
+        <Head title='Sign Up'/>
           <div className="mx-auto max-w-screen min-h-screen bg-black text-white md:px-10 px-3">
               <div className="fixed top-[-50px] hidden lg:block">
                   <img
@@ -22,7 +22,7 @@ export default function Login() {
                       <img src="/images/moonton-white.svg" alt="" />
                       <div className="my-[70px]">
                           <div className="font-semibold text-[26px] mb-3">
-                              Welcome Back
+                              Sign Up
                           </div>
                           <p className="text-base text-[#767676] leading-7">
                               Explore our new movies and get <br />
@@ -32,35 +32,42 @@ export default function Login() {
                       <form className="w-[370px]">
                           <div className="flex flex-col gap-6">
                               <div>
+                                  <InputLabel>Full Name</InputLabel>
+                                  <TextInput
+                                      placeholder="Your Full Name"
+                                      name="fullName"
+                                      type="text"
+                                      className="focus:outline-alerange focus:outline-none"
+                                  />
+                              </div>
+                              <div>
                                   <InputLabel>Email Address</InputLabel>
                                   <TextInput
-                                      type="email"
+                                      placeholder="Your Email Address"
                                       name="email"
+                                      type="email"
                                       className="focus:outline-alerange focus:outline-none"
-                                      placeholder="Input Email Address"
-                                      variant=""
                                   />
                               </div>
                               <div>
                                   <InputLabel>Password</InputLabel>
                                   <TextInput
-                                      type="password"
                                       name="password"
+                                      type="password"
+                                      placeholder="Your Password"
                                       className="focus:outline-alerange focus:outline-none"
-                                      placeholder="Input Password"
-                                      variant=""
                                   />
                               </div>
                           </div>
                           <div className="grid space-y-[14px] mt-[30px]">
-                              <PrimaryButton>Start Watching</PrimaryButton>
+                              <PrimaryButton>Sign Up</PrimaryButton>
 
                               <Link
                                   className="grid"
-                                  href={route("prototype.register")}
+                                  href={route("prototype.login")}
                               >
                                   <SecondaryButton>
-                                      Create New Account
+                                      Sign In To My Account
                                   </SecondaryButton>
                               </Link>
                           </div>
