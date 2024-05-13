@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Siderbar() {
+export default function Sidebar() {
   return (
         <aside className="fixed z-50 w-[300px] h-full">
 
