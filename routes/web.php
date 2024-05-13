@@ -33,6 +33,9 @@ Route::prefix('prototype')->name('prototype.')->group(function(){
     Route::get('/subscription', function(){
         return Inertia::render('Prototype/SubscriptionPlan');
     })->name('subscription');
+    Route::get('/movie/{slug}', function(){
+        return Inertia::render('Prototype/Movie/Show');
+    })->name('movie.show');
 });
 
 Route::middleware('auth')->group(function () {

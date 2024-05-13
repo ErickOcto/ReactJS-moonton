@@ -430,6 +430,7 @@
     "range-parser": "^1.2.1",
     "raw-body": "^2.5.2",
     "react-flickity-component": "^4.0.7",
+    "react-player": "^2.16.0",
     "react-refresh": "^0.14.2",
     "read-cache": "^1.0.0",
     "readable-stream": "^2.3.8",
