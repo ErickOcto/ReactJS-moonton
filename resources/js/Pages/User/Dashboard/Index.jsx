@@ -47,13 +47,13 @@ export default function Dashboard({auth, feats, movies}) {
                             Browse
                         </div>
                         <Flickity options={flickityOptions}>
-                            {[1, 2, 3, 4].map((i) => (
+                            {movies.map((movie) => (
                                 <BrowseMovie
-                                    key={i}
-                                    slug="Meong The Golden"
-                                    name="Meong The Golden"
-                                    category="Adventure"
-                                    thumbnail="/images/featured-3.png"
+                                    key={movie.id}
+                                    slug={movie.slug}
+                                    name={movie.name}
+                                    category={movie.category}
+                                    thumbnail={movie.thumbnail}
                                 />
                             ))}
                         </Flickity>
