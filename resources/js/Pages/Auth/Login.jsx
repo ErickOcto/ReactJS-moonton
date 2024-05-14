@@ -97,7 +97,7 @@ export default function Login() {
 
                                 <Link
                                     className="grid"
-                                    href={route("prototype.register")}
+                                    href={route("register")}
                                 >
                                     <SecondaryButton>
                                         Create New Account

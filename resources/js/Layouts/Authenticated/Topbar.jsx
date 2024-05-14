@@ -43,12 +43,12 @@ export default function Topbar({name}) {
                       className="bg-white rounded-2xl text-black font-medium flex flex-col gap-1 absolute z-[999] right-0 top-[80px] min-w-[180px] hidden overflow-hidden"
                       ref={dropdownTarget}
                   >
-                      <a
-                          href="#!"
+                      <Link
+                          href={route('user.dashboard.index')}
                           className="transition-all hover:bg-sky-100 p-4"
                       >
                           Dashboard
-                      </a>
+                      </Link>
                       <a
                           href="#!"
                           className="transition-all hover:bg-sky-100 p-4"

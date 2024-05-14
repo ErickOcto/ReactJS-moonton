@@ -143,7 +143,7 @@ export default function Register() {
 
                                 <Link
                                     className="grid"
-                                    href={route("prototype.login")}
+                                    href={route("login")}
                                 >
                                     <SecondaryButton>
                                         Sign In To My Account
