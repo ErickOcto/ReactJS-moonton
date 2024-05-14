@@ -21,7 +21,7 @@ class SubscriptionSeeder extends Seeder
                     "features" => json_encode(['Feature 1', 'Feature 2', 'Feature 3'])
                 ],
                 [
-                    "name" => "Basic",
+                    "name" => "Premium",
                     "price" => 900000,
                     "active" => 12,
                     "features" => json_encode(['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5', 'Feature 6'])

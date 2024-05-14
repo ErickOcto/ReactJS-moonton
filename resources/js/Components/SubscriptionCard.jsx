@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import PrimaryButton from "./PrimaryButton";
 
 export default function SubscriptionCard({
@@ -35,13 +36,12 @@ export default function SubscriptionCard({
                       ))}
                   </div>
 
-                  <div>
-                      <a
-                          href="payment_status/failed.html"
+                  <div onClick={onSelectSubscription}>
+                      <Link
                           className="rounded-2xl border border-[#F1F1F1] py-[13px] text-center grid"
                       >
                           <span className="text-base">Start Basic</span>
-                      </a>
+                      </Link>
                   </div>
               </div>
           )}
@@ -62,7 +62,10 @@ export default function SubscriptionCard({
 
                   <div className="flex flex-col gap-4">
                       {features.map((feature, index) => (
-                          <div className="flex items-center gap-2" key={`${index}-${id}-${feature}`}>
+                          <div
+                              className="flex items-center gap-2"
+                              key={`${index}-${id}-${feature}`}
+                          >
                               <svg
                                   width="24"
                                   height="24"
@@ -73,32 +76,26 @@ export default function SubscriptionCard({
                               >
                                   <path
                                       d="M8.4402 12.0001L10.8142 14.3731L15.5602 9.62708"
-                                      stroke-width="1.5"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
                                   />
                                   <path
-                                      fill-rule="evenodd"
-                                      clip-rule="evenodd"
+                                      fillRule="evenodd"
+                                      clipRule="evenodd"
                                       d="M2.7498 12.0001C2.7498 18.9371 5.0628 21.2501 11.9998 21.2501C18.9368 21.2501 21.2498 18.9371 21.2498 12.0001C21.2498 5.06312 18.9368 2.75012 11.9998 2.75012C5.0628 2.75012 2.7498 5.06312 2.7498 12.0001Z"
-                                      stroke-width="1.5"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
                                   />
                               </svg>
-                              <span className="text-sm">
-                                  {feature}
-                              </span>
+                              <span className="text-sm">{feature}</span>
                           </div>
                       ))}
                   </div>
 
                   <div className="grid" onClick={onSelectSubscription}>
-                      <PrimaryButton
-                      type="button"
-                      >
-                            Subscribe Now
-                      </PrimaryButton>
+                      <PrimaryButton type="button">Subscribe Now</PrimaryButton>
                   </div>
               </div>
           )}

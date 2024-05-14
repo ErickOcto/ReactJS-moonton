@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\MovieController;
+use App\Http\Controllers\User\UserSubController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,8 @@ Route::redirect('/', '/login');
 Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashboard.')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show');
+    Route::get('/subscriptions', [UserSubController:: class, 'index'])->name('subscriptions.index');
+    Route::post('/subscriptions/{sub}/user-subs', [UserSubController:: class, 'userSub'])->name('subscriptions.userSub');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function(){
