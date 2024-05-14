@@ -134,7 +134,7 @@ export default function Sidebar() {
                           </svg>
                           Your Profile
                       </a>
-                      <a href="sign_in.html" className="side-link mb-0">
+                      <Link href={route('logout')} method='post' className="side-link mb-0">
                           <svg
                               width="24"
                               height="24"
@@ -149,7 +149,7 @@ export default function Sidebar() {
                               />
                           </svg>
                           Logout
-                      </a>
+                      </Link>
                   </div>
 
                   <div className="mt-auto pr-[30px]">
