@@ -24,23 +24,24 @@ class HandleInertiaRequests extends Middleware
         return parent::version($request);
     }
 
-public function activePlan(){
-    $activePlan = Auth::user() ? Auth::user()->LastActiveUserSubscription : null;
+    private function activePlan()
+    {
+        $activePlan = Auth::user() ? Auth::user()->LastActiveUserSubscription : null;
 
-    if(!$activePlan){
-        return null;
+        if (!$activePlan) {
+            return null;
+        }
+
+        $lastDay = Carbon::parse($activePlan->updated_at)->addMonths($activePlan->subscriptionPlan->active);
+        $activeDays = Carbon::parse($activePlan->updated_at)->diffInDays($lastDay);
+        $remaingActiveDays = (int) Carbon::parse($activePlan->expired_date)->diffInDays(Carbon::now());
+
+        return [
+            'name' => $activePlan->subscriptionPlan->name,
+            'remainingActiveDays' => $remaingActiveDays,
+            'activeDays' => $activeDays,
+        ];
     }
-
-    $lastDay = Carbon::parse($activePlan->updated_at)->addMonths($activePlan->subscriptionPlan->active);
-    $activeDays = Carbon::parse($activePlan->updated_at)->diffInDays($lastDay);
-    $remainingActiveDays = Carbon::parse($activePlan->expired_date)->diffInDays(Carbon::now());
-
-    return [
-        'name' => $activePlan->subscriptionPlan->name,
-        'remainingActiveDays' => $remainingActiveDays,
-        'activeDays' => $activeDays,
-    ];
-}
 
     /**
      * Define the props that are shared by default.
@@ -53,6 +54,7 @@ public function activePlan(){
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'activePlan' => $this->activePlan(),
             ],
         ];
     }

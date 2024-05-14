@@ -22,7 +22,7 @@ class UserSubController extends Controller
             "subscription_plan_id" => $sub->id,
             "price" => $sub->price,
             "expired_date" => Carbon::now()->addMonths($sub->active),
-            "payment_status" => "paid",
+            "payment_status" => "success",
         ];
 
         UserSubscription::create($data);
