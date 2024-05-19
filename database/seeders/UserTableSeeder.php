@@ -19,5 +19,12 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         $admin->assignRole('admin');
+
+        $user = User::create([
+            'name' => 'user',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user->assignRole('user');
     }
 }

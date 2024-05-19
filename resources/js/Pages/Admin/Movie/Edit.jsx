@@ -3,22 +3,25 @@ import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, useForm, router } from "@inertiajs/react";
 import Checkbox from "@/Components/Checkbox";
 
-export default function Create({ auth }) {
-    const { data, setData, post, processing, errors } = useForm({
-        name: "",
-        category: "",
-        video_url: "",
-        thumbnail: "",
-        rating: "",
-        is_featured: "",
+export default function Create({ auth, movie }) {
+    const { data, setData, processing, errors } = useForm({
+        ...movie,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("admin.dashboard.movie.store"));
+
+        // if(data.thumbnail === movie.thumbnail){
+        //     delete data.thumbnail;
+        // }
+
+        router.put(route("admin.dashboard.movie.update", movie.id), {
+            _method: "PUT",
+            ...data
+        });
     };
 
     return (
@@ -27,7 +30,7 @@ export default function Create({ auth }) {
                 <title>Admin Upload Movie</title>
             </Head>
             <Authenticated auth={auth}>
-                <h1 className="text-xl font-bold">Insert New Movie</h1>
+                <h1 className="text-xl font-bold">Update: {movie.name}</h1>
                 <hr className="hr-4 my-4" />
                 <form
                     className="w-full"
@@ -97,7 +100,11 @@ export default function Create({ auth }) {
                         </div>
                         <div>
                             <InputLabel>Movie Thumbnail</InputLabel>
-
+                            <img
+                                src={`/storage/movies/${movie.thumbnail}`}
+                                alt={movie.thumbnail}
+                                className="w-40 mb-4 rounded-xl"
+                            />
                             <input
                                 type="file"
                                 name="thumbnail"
@@ -133,8 +140,11 @@ export default function Create({ auth }) {
                             />
                         </div>
                         <div className="flex flex-row mt-4 gap-2 items-center">
-                            <InputLabel className="m-0">Movie Feature</InputLabel>
+                            <InputLabel className="m-0">
+                                Movie Feature
+                            </InputLabel>
                             <Checkbox
+                                checked={movie.is_featured}
                                 name="is_featured"
                                 value={data.is_featured}
                                 isFocused={true}
@@ -150,7 +160,7 @@ export default function Create({ auth }) {
                     </div>
                     <div className="grid space-y-[14px] mt-[30px]">
                         <PrimaryButton disabled={processing}>
-                            Upload Movie
+                            Save Changes
                         </PrimaryButton>
 
                         <Link

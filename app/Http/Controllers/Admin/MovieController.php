@@ -16,7 +16,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Inertia('Admin/Movie/Index');
+        $movies = Movie::all();
+        return Inertia::render('Admin/Movie/Index', [
+            'movies' => $movies
+        ]);
     }
 
     /**
@@ -68,7 +71,10 @@ class MovieController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        return Inertia::render('Admin/Movie/Edit', [
+            'movie' => $movie
+        ]);
     }
 
     /**
@@ -76,14 +82,59 @@ class MovieController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //dd($request->all());
+        // $request->validate([
+        //     'name' => 'required|max:100',
+        //     'category' => 'required|max:100',
+        //     'rating' => 'required|numeric|min:0|max:5',
+        //     'is_featured' => 'boolean',
+        //     'video_url' => 'required|url',
+        //     'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Tambahkan validasi untuk file gambar
+        // ]);
+
+        $movie = Movie::findOrFail($id);
+
+        if ($request->hasFile('thumbnail')) {
+
+            $thumbnail = $request->file('thumbnail');
+            $thumbnail->storeAs('public/movies', $thumbnail->hashName());
+
+            Storage::delete('public/movies/'.$movie->thumbnail);
+
+            $movie->update([
+                'thumbnail'     => $thumbnail->hashName(),
+                'name'     => $request->name,
+                'slug'   => $request->slug,
+                'category'   => $request->category,
+                'video_url'   => $request->video_url,
+                'rating'   => $request->rating,
+                'is_featured'   => $request->is_featured,
+            ]);
+
+        }else{
+
+            //update post without image
+            $movie->update([
+                'name'     => $request->name,
+                'slug'   => $request->slug,
+                'category'   => $request->category,
+                'video_url'   => $request->video_url,
+                'rating'   => $request->rating,
+                'is_featured'   => $request->is_featured,
+            ]);
+        }
+
+
+        return redirect(route('admin.dashboard.movie.index'))->with(["message" => "Movie changed successfully", "type" => "success"]);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Movie::findOrFail($id)->delete();
+        return redirect()->back()->with(["message" => "Movie deleted successfully", "type" => "success"]);
     }
 }
