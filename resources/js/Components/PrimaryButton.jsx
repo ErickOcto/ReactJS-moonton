@@ -9,7 +9,7 @@ export default function PrimaryButton({ className = '', disabled, children, ...p
             }
             disabled={disabled}
         >
-            <span className="text-base font-semibold">{children}</span>
+            <span className="text-base text-white font-semibold">{children}</span>
         </button>
     );
 }

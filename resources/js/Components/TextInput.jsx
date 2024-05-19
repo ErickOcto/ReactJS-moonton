@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function TextInput({
-    type = 'text',
+    type = '',
     className = '',
     defaultValue,
     variant = "primary",
@@ -24,7 +24,7 @@ export default forwardRef(function TextInput({
             {...props}
             type={type}
             defaultValue={defaultValue}
-            className={`rounded-2xl bg-form-bg py-[13px] px-7 w-full ${isError && "input-error"} input-${variant} ${className}`}
+            className={`rounded-2xl py-[13px] px-7 w-full border-alerange ${isError && "input-error"} input-${variant} ${className}`}
             placeholder={placeholder}
             ref={input}
         />
