@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
+use Tighten\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -60,7 +61,13 @@ class HandleInertiaRequests extends Middleware
             'flashMessage' => [
                 'message' => Session::get('message'),
                 'type' => Session::get('type'),
-            ]
+            ],
+            'env' => [
+                'MIDTRANS_CLIENTKEY' => env('MIDTRANS_CLIENTKEY')
+            ],
+            // 'ziggy' => function () {
+            //     return (new Ziggy)->toArray();
+            // }
         ];
     }
 }

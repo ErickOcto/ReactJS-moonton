@@ -20,6 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'checkUserSubscription' => \App\Http\Middleware\CheckUserSubscription::class,
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'midtrans/notification',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

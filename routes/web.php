@@ -9,6 +9,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// MIDTRANS ROUTE
+Route::post('midtrans/notification', [UserSubController::class, 'midtransCallback']);
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -29,7 +32,7 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function(){
     Route::resource('movie', AdminMovieController::class);
-    
+
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function(){
